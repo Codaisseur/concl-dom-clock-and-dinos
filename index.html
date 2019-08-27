@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Page title</title>
+  </head>
+  <body>
+    <div id="clock-block">
+        <span class="hours"   style="color: blue"></span>:
+        <span class="minutes" style="color: orange"></span>:
+        <span class="seconds" style="color: red"></span>
+    </div>
+    <script>
+        const state = {
+          hours: 0,
+          minutes: 0
+        }
+        let hoursString = 0
+        const element = document.getElementById('clock-block')
+        const hours = element.querySelector('.hours')
+        const minutes = element.querySelector('.minutes')
+        const seconds = element.querySelector('.seconds')
+        setInterval(() => {
+            const d = new Date()
+            let newHours = d.getHours()
+            if (newHours !== hoursString) {
+              hoursString = newHours
+              hours.textContent = zeroPad(hoursString)
+            }
+            minutes.textContent = zeroPad(d.getMinutes())
+            seconds.textContent = zeroPad(d.getSeconds())
+        }, 50);
+        function zeroPad(text) {
+            text = text + ''
+            if (text.length === 1) {
+                text = '0' + text
+            }
+            return text
+        }
+    </script>
+  </body>
+</html>
